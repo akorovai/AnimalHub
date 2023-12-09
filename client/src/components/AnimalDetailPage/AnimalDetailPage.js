@@ -14,18 +14,26 @@ const AnimalDetailPage = () => {
     const {animalId} = useParams();
 
     useEffect(() => {
+        let isMounted = true;
         (async function fetchData() {
-            fetch(`http://localhost:3000/animals/${animalId}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                    setAnimal(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
-                    window.location.href = 'http://localhost:3001/error';
-                });
-        })();
+                fetch(`http://localhost:3000/animals/${animalId}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (isMounted) {
+                            console.log(data);
+                            setAnimal(data);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching data:", error);
+                        window.location.href = 'http://localhost:3001/error';
+                    });
+            }
+
+        )();
+        return () => {
+            isMounted = false;
+        }
     }, [animalId]);
 
     function handleDelete() {
@@ -43,6 +51,7 @@ const AnimalDetailPage = () => {
     }
 
     function handleUpdate() {
+
         (async function fetchData() {
             fetch(`http://localhost:3000/animals/${animalId}`, {
                 method: "PUT",
@@ -57,6 +66,7 @@ const AnimalDetailPage = () => {
                 window.location.href = 'http://localhost:3001/error';
             });
         })();
+
     }
 
     return (

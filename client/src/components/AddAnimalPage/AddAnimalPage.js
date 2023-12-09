@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { AddButton, FormBox } from './AddAnimalPage.styles';
-import { Container } from "../../GlobalStyles";
+import React, {useState} from "react";
+import {AddButton, FormBox} from './AddAnimalPage.styles';
+import {Container} from "../../GlobalStyles";
 import NewInputFieldValue from "./NewInputFieldValue";
 import {ReturnLink} from "../AnimalDetailPage/AnimalDetailPage.styles";
 
@@ -24,7 +24,7 @@ const AddAnimalPage = () => {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setPetData({
             ...petData,
             [name]: value,
@@ -77,10 +77,8 @@ const AddAnimalPage = () => {
                 {renderInputField("Species", "species", validations.species, "* Wprowadź co najmniej 3 znaki!")}
                 {renderInputField("Color", "color", validations.color, "* Wprowadź co najmniej 3 znaki!")}
                 {renderInputField("Sound", "sound", validations.sound, "* Wprowadź co najmniej 2 znaki!")}
-                <br />
-                <AddButton onClick={handleAddPet}>
-                    Add
-                </AddButton>
+                <br/>
+                <AddButton onClick={handleAddPet}> Add </AddButton>
                 <ReturnLink to={"/"}>Return</ReturnLink>
             </FormBox>
         </Container>

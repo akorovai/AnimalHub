@@ -38,24 +38,24 @@ export const FormBox = styled.div`
 `;
 
 export const AddButton = styled.button`
-  display: block;
-  background: #4caf50;
-  border-radius: 12px;
-  width: 90%;
-  margin: 6px auto 0;
-  border: 0;
-  outline: 0;
-  font-weight: 500;
-  font-size: 24px;
-  text-decoration: none;
-  padding: 2px;
-  box-sizing: border-box;
-  transition: background 0.3s ease;
-  color: azure;
+    display: block;
+    background: #4caf50;
+    border-radius: 12px;
+    width: 90%;
+    margin: 6px auto 0;
+    border: 0;
+    outline: 0;
+    font-weight: 500;
+    font-size: 24px;
+    text-decoration: none;
+    padding: 2px;
+    box-sizing: border-box;
+    transition: background 0.3s ease;
+    color: azure;
 
-  &:hover {
-    background: #388e3c;
-  }
+    &:hover {
+        background: #388e3c;
+    }
 `;
 export const ErrorText = styled.p`
   color: #f44336;

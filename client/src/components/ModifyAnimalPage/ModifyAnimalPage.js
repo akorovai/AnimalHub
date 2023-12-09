@@ -28,22 +28,29 @@ const ModifyAnimalPage = () => {
     };
 
     useEffect(() => {
+        let isMounted = true;
         (async function fetchData() {
             try {
                 const response = await fetch(`http://localhost:3000/animals/${animalId}`);
                 animalRef.current = await response.json();
-                setOldAnimal({
-                    name: "",
-                    age: "",
-                    species: "",
-                    color: "",
-                    sound: "",
-                });
+                if (isMounted) {
+                    setOldAnimal({
+                        name: "",
+                        age: "",
+                        species: "",
+                        color: "",
+                        sound: "",
+                    });
+                }
+
             } catch (error) {
                 console.error("Error fetching data:", error);
                 window.location.href = 'http://localhost:3001/error';
             }
         })();
+        return () => {
+            isMounted = false;
+        }
     }, [animalId]);
 
     const renderInputField = (placeholder, name, validation, errorText) => (

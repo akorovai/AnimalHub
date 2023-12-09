@@ -1,22 +1,31 @@
-import { useEffect, useState } from "react";
-import { Container, AnimalTableBox, StyledLink, ReturnButton} from "./AnimalsListPage.styles";
-
+import {useEffect, useState} from "react";
+import {AnimalTableBox, Container, ReturnButton, StyledLink} from "./AnimalsListPage.styles";
 
 
 const AnimalsListPage = () => {
     const [animals, setAnimals] = useState([]);
 
     useEffect(() => {
-        (async function fetchData(){
+        let isMounted = true;
+
+        (async function fetchData() {
             try {
-                const response = await fetch("http://localhost:3000/animals");
-                const data = await response.json();
-                setAnimals(data.data);
+                    const response = await fetch("http://localhost:3000/animals");
+                    const data = await response.json();
+                if (isMounted) {
+                    console.log(data.data);
+                    setAnimals(data.data);
+                }
             } catch (error) {
                 console.error("Error fetching data:", error);
                 setAnimals([]);
             }
         })();
+
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return (
@@ -24,7 +33,7 @@ const AnimalsListPage = () => {
             <AnimalTableBox>
                 <h3>Table of Pets</h3>
 
-                <ReturnButton onClick={() =>   window.location.href = 'http://localhost:3001'}>Return</ReturnButton>
+                <ReturnButton onClick={() => window.location.href = 'http://localhost:3001'}>Return</ReturnButton>
                 {Array.isArray(animals) && animals.length > 0 ? (
                     <table>
                         <thead>
